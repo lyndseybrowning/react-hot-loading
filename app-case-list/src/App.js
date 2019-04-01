@@ -41,15 +41,19 @@ class App extends Component {
     }
 
     selectCase = (id, version) => () => {
-        const { title, ref } = cases.find(c => c.id === id);
+        const { title, ref: refNumber } = cases.find(c => c.id === id);
 
         this.setState(
             {
-                selectedCaseName: `${title} ${ref}`,
+                selectedCaseName: `${title} ${refNumber}`,
             },
             () => {
                 window[`case-details-v${version}`].default.render(
                     "case-details",
+                    {
+                        refNumber,
+                        version,
+                    },
                 );
             },
         );
